@@ -218,16 +218,23 @@ off &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Offensive
 kikr &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Kick Returns&#39;)
 kik &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Kicking&#39;)
 bio &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Biography&#39;)</code></pre>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ### Part 1 Question 1 ======= ## Part 1 : Question 1 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 30fe22f2c2b1f97688ed2a7d91d9489c7316c8dc</p>
+</div>
+<div id="part-1-question-1" class="section level3">
+<h3>Part 1 Question 1</h3>
+</div>
+<div id="part-1-question-1-1" class="section level2">
+<h2>Part 1 : Question 1</h2>
 <pre class="r"><code>def$Name &lt;- factor(def$Name)
 def$Opponent_Opponent &lt;- factor(def$Opponent_Opponent)
 off$Name &lt;- factor(off$Name)
 off$Opponent_Opponent &lt;- factor(off$Opponent_Opponent)</code></pre>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ### Part 1 Question 2 ======= ## Part 1 : Question 2 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 30fe22f2c2b1f97688ed2a7d91d9489c7316c8dc</p>
-<pre class="r"><code>library(&#39;tidyverse&#39;)
-library(&#39;dplyr&#39;)
-
-defClean &lt;- def %&gt;%
+<div id="part-1-question-2" class="section level3">
+<h3>Part 1 Question 2</h3>
+</div>
+</div>
+<div id="part-1-question-2-1" class="section level2">
+<h2>Part 1 : Question 2</h2>
+<pre class="r"><code>defClean &lt;- def %&gt;%
   mutate(Tackles_Solo=as.numeric(Tackles_Solo)) %&gt;%
   mutate(Tackles_ASST=as.numeric(Tackles_ASST)) %&gt;%
   mutate(Tackles_TFL=as.numeric(Tackles_TFL)) %&gt;%
@@ -249,18 +256,23 @@ bioClean &lt;- bio %&gt;%
 #str(defClean)
 #str(bioClean)
 #str(offClean)</code></pre>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ### Part 1 Question 3 ======= ## Part 1 : Question 3 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 30fe22f2c2b1f97688ed2a7d91d9489c7316c8dc</p>
+<div id="part-1-question-3" class="section level3">
+<h3>Part 1 Question 3</h3>
+</div>
+</div>
+<div id="part-1-question-3-1" class="section level2">
+<h2>Part 1 : Question 3</h2>
 <pre class="r"><code>bioClean &lt;- bioClean %&gt;%
   separate(Height, c(&#39;Height_feet&#39;, &#39;Height_inches&#39;)) %&gt;%
   mutate(Height_feet = as.integer(Height_feet), 
          Height_inches = as.integer(Height_inches)) %&gt;%
   mutate(Height = (Height_inches + (Height_feet * 12))) %&gt;%
   select(-Height_inches, -Height_feet)</code></pre>
-</div>
 <div id="part-2-question-4" class="section level3">
 <h3>Part 2 Question 4</h3>
 <pre class="r"><code>bioClean &lt;- bioClean %&gt;%
   separate(Hometown, c(&#39;Hometown_city&#39;, &#39;Hometown_state&#39;), sep = &#39;, &#39;)</code></pre>
+</div>
 </div>
 
 
