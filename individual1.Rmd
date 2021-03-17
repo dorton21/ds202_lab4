@@ -9,7 +9,7 @@ str(defense)
 str(offense)
 ```
 
-## Question 2
+## Part 1: Question 2
 ```{r}
 library('tidyverse')
 library('dplyr')
@@ -36,5 +36,10 @@ bioClean <- biography %>%
 str(defClean)
 str(bioClean)
 str(offClean)
+```
+
+## Part 2 : Question 3
+```{r}
+
 ```
 
