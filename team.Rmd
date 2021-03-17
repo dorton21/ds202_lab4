@@ -71,6 +71,10 @@ bioClean <- bioClean %>%
          Height_inches = as.integer(Height_inches)) %>%
   mutate(Height = (Height_inches + (Height_feet * 12))) %>%
   select(-Height_inches, -Height_feet)
+
+str(defClean)
+str(offClean)
+str(bioClean)
 ```
 
 ### Part 2 Question 4
