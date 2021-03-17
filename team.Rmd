@@ -83,3 +83,10 @@ bioClean <- bioClean %>%
   separate(Hometown, c('Hometown_city', 'Hometown_state'), sep = ', ')
 ```
 
+### Part 2 Question 5
+```{r}
+bioClean %>%
+  select(Hometown_state) %>%
+  group_by(Hometown_state) %>%
+  summarise(count = n())
+```
