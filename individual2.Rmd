@@ -11,6 +11,7 @@ str(biography)
 
 ```
 
+Question 1
 ```{R}
 
 defense$Name <- factor(defense$Name)

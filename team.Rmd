@@ -11,3 +11,43 @@ kikr <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Kick Returns')
 kik <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Kicking')
 bio <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Biography')
 ```
+
+Part 1 Question 1
+```{R}
+
+defense$Name <- factor(defense$Name)
+defense$Opponent_Opponent <- factor(defense$Opponent_Opponent)
+offense$Name <- factor(offense$Name)
+offense$Opponent_Opponent <- factor(offense$Opponent_Opponent)
+
+
+```
+
+Part 1 Question 2
+```{r}
+library('tidyverse')
+library('dplyr')
+
+defClean <- defense %>%
+  mutate(Tackles_Solo=as.numeric(Tackles_Solo)) %>%
+  mutate(Tackles_ASST=as.numeric(Tackles_ASST)) %>%
+  mutate(Tackles_TFL=as.numeric(Tackles_TFL)) %>%
+  mutate(Tackles_Sack=as.numeric(Tackles_Sack)) %>%
+  mutate(Turnover_FF=as.numeric(Turnover_FF)) %>%
+  mutate(Turnover_FR=as.numeric(Turnover_FR)) %>%
+  mutate(Turnover_INT=as.numeric(Turnover_INT)) %>%
+  mutate(Pass_QBH=as.numeric(Pass_QBH)) %>%
+  mutate(Pass_PB=as.numeric(Pass_PB))
+  
+offClean <- offense %>%
+  mutate(Receiving_REC=as.numeric(Receiving_REC)) %>%
+  mutate(Receiving_YDS=as.numeric(Receiving_YDS)) %>%
+  mutate(Receiving_TD=as.numeric(Receiving_TD))
+  
+bioClean <- biography %>%
+  mutate(Weight=as.numeric(Weight))
+
+str(defClean)
+str(bioClean)
+str(offClean)
+```
