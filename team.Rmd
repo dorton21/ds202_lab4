@@ -16,10 +16,10 @@ bio <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Biography')
 Part 1 Question 1
 ```{R}
 
-defense$Name <- factor(defense$Name)
-defense$Opponent_Opponent <- factor(defense$Opponent_Opponent)
-offense$Name <- factor(offense$Name)
-offense$Opponent_Opponent <- factor(offense$Opponent_Opponent)
+def$Name <- factor(def$Name)
+def$Opponent_Opponent <- factor(def$Opponent_Opponent)
+off$Name <- factor(off$Name)
+off$Opponent_Opponent <- factor(off$Opponent_Opponent)
 
 
 ```
@@ -29,7 +29,7 @@ Part 1 Question 2
 library('tidyverse')
 library('dplyr')
 
-defClean <- defense %>%
+defClean <- def %>%
   mutate(Tackles_Solo=as.numeric(Tackles_Solo)) %>%
   mutate(Tackles_ASST=as.numeric(Tackles_ASST)) %>%
   mutate(Tackles_TFL=as.numeric(Tackles_TFL)) %>%
@@ -40,12 +40,12 @@ defClean <- defense %>%
   mutate(Pass_QBH=as.numeric(Pass_QBH)) %>%
   mutate(Pass_PB=as.numeric(Pass_PB))
   
-offClean <- offense %>%
+offClean <- off %>%
   mutate(Receiving_REC=as.numeric(Receiving_REC)) %>%
   mutate(Receiving_YDS=as.numeric(Receiving_YDS)) %>%
   mutate(Receiving_TD=as.numeric(Receiving_TD))
   
-bioClean <- biography %>%
+bioClean <- bio %>%
   mutate(Weight=as.numeric(Weight))
 
 str(defClean)
