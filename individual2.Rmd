@@ -1,0 +1,28 @@
+```{R}
+
+library(dplyr)
+library(readxl)
+defense <- read_excel('C:/Users/justi/Desktop/DS202/ds202_lab4/cyclonesFootball2020.xlsx', sheet='Defensive')
+offense <- read_excel('C:/Users/justi/Desktop/DS202/ds202_lab4/cyclonesFootball2020.xlsx', sheet='Offensive')
+biography <- read_excel('C:/Users/justi/Desktop/DS202/ds202_lab4/cyclonesFootball2020.xlsx', sheet='Biography')
+str(defense)
+str(offense)
+str(biography)
+
+```
+
+```{R}
+
+defense$Name <- factor(defense$Name)
+defense$Opponent_Opponent <- factor(defense$Opponent_Opponent)
+offense$Name <- factor(offense$Name)
+offense$Opponent_Opponent <- factor(offense$Opponent_Opponent)
+
+
+```
+
+```{R}
+
+
+
+```
