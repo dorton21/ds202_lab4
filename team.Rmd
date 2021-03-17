@@ -1,0 +1,13 @@
+
+### Setup
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readxl)
+
+def <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Defensive')
+off <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Offensive')
+kikr <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Kick Returns')
+kik <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Kicking')
+bio <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Biography')
+```
