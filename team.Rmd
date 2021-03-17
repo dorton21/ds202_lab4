@@ -13,7 +13,7 @@ kik <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Kicking')
 bio <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Biography')
 ```
 
-Part 1 Question 1
+### Part 1 Question 1
 ```{R}
 
 def$Name <- factor(def$Name)
@@ -24,7 +24,7 @@ off$Opponent_Opponent <- factor(off$Opponent_Opponent)
 
 ```
 
-Part 1 Question 2
+### Part 1 Question 2
 ```{r}
 library('tidyverse')
 library('dplyr')
@@ -53,12 +53,19 @@ str(bioClean)
 str(offClean)
 ```
 
-Part 1 Question 3
+### Part 1 Question 3
 ```{r}
-bio %>%
+bioClean <- bioClean %>%
   separate(Height, c('Height_feet', 'Height_inches')) %>%
   mutate(Height_feet = as.integer(Height_feet), 
          Height_inches = as.integer(Height_inches)) %>%
   mutate(Height = (Height_inches + (Height_feet * 12))) %>%
   select(-Height_inches, -Height_feet)
 ```
+
+### Part 2 Question 4
+```{r}
+bioClean <- bioClean %>%
+  separate(Hometown, c('Hometown_city', 'Hometown_state'), sep = ', ')
+```
+

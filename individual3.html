@@ -239,6 +239,28 @@ bio &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Biography
 ## 10 Bitter, Aid~ Wide Recei~ 182    Freshman    Tampa, Fla.   Steinbrenner     74
 ## # ... with 106 more rows</code></pre>
 </div>
+<div id="part-two" class="section level3">
+<h3>Part Two</h3>
+</div>
+<div id="question-4" class="section level3">
+<h3>Question 4</h3>
+<pre class="r"><code>bio %&gt;%
+  separate(Hometown, c(&#39;Hometown_city&#39;, &#39;Hometown_state&#39;), sep = &#39;, &#39;)</code></pre>
+<pre><code>## # A tibble: 116 x 8
+##    Name    Position  Height Weight Class Hometown_city Hometown_state Highschool
+##    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;     
+##  1 Akers,~ Wide Rec~ 6-0    191    Reds~ Cedar Rapids  Iowa           Washington
+##  2 Allen,~ Tight End 6-7    240    Reds~ Nixa          Mo.            Nixa      
+##  3 Anders~ Wide Rec~ 6-5    208    Reds~ Seffner       Fla.           Armwood   
+##  4 Antoin~ Defensiv~ 6-0    180    Fres~ Ft. Lauderda~ Fla.           Cardinal ~
+##  5 Assall~ Placekic~ 6-0    195    Reds~ Naperville    Ill.           Central   
+##  6 Azunna~ Defensiv~ 6-0    199    Reds~ Grand Prairie Texas          Lake Ridge
+##  7 Bailey~ Defensiv~ 6-3    253    Reds~ Clarksdale    Miss.          Clarksdale
+##  8 Bailey~ Defensiv~ 6-2    261    Reds~ Jacksonville  Fla.           Raines    
+##  9 Bailey~ Defensiv~ 6-2    288    Reds~ Jacksonville  Fla.           Raines    
+## 10 Bitter~ Wide Rec~ 6-2    182    Fres~ Tampa         Fla.           Steinbren~
+## # ... with 106 more rows</code></pre>
+</div>
 
 
 
