@@ -205,11 +205,39 @@ summary {
 <pre class="r"><code>library(ggplot2)
 library(readxl)</code></pre>
 <pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.0.4</code></pre>
-<pre class="r"><code>def &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Defensive&#39;)
+<pre class="r"><code>library(tidyr)
+
+def &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Defensive&#39;)
 off &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Offensive&#39;)
 kikr &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Kick Returns&#39;)
 kik &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Kicking&#39;)
 bio &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Biography&#39;)</code></pre>
+</div>
+<div id="part-one" class="section level3">
+<h3>Part One</h3>
+</div>
+<div id="question-3" class="section level3">
+<h3>Question 3</h3>
+<pre class="r"><code>bio %&gt;%
+  separate(Height, c(&#39;Height_feet&#39;, &#39;Height_inches&#39;)) %&gt;%
+  mutate(Height_feet = as.integer(Height_feet), 
+         Height_inches = as.integer(Height_inches)) %&gt;%
+  mutate(Height = (Height_inches + (Height_feet * 12))) %&gt;%
+  select(-Height_inches, -Height_feet)</code></pre>
+<pre><code>## # A tibble: 116 x 7
+##    Name         Position    Weight Class       Hometown      Highschool   Height
+##    &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;         &lt;dbl&gt;
+##  1 Akers, Land~ Wide Recei~ 191    Redshirt S~ Cedar Rapids~ Washington       72
+##  2 Allen, Chase Tight End   240    Redshirt S~ Nixa, Mo.     Nixa             79
+##  3 Anderson, E~ Wide Recei~ 208    Redshirt F~ Seffner, Fla. Armwood          77
+##  4 Antoine Jr.~ Defensive ~ 180    Freshman    Ft. Lauderda~ Cardinal Gi~     72
+##  5 Assalley, C~ Placekicker 195    Redshirt S~ Naperville, ~ Central          72
+##  6 Azunna, Arn~ Defensive ~ 199    Redshirt S~ Grand Prairi~ Lake Ridge       72
+##  7 Bailey, Cor~ Defensive ~ 253    Redshirt J~ Clarksdale, ~ Clarksdale       75
+##  8 Bailey, JaQ~ Defensive ~ 261    Redshirt S~ Jacksonville~ Raines           74
+##  9 Bailey, Jos~ Defensive ~ 288    Redshirt S~ Jacksonville~ Raines           74
+## 10 Bitter, Aid~ Wide Recei~ 182    Freshman    Tampa, Fla.   Steinbrenner     74
+## # ... with 106 more rows</code></pre>
 </div>
 
 
