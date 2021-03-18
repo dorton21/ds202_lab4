@@ -21,9 +21,3 @@ offense$Opponent_Opponent <- factor(offense$Opponent_Opponent)
 
 
 ```
-
-```{R}
-
-
-
-```
