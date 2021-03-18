@@ -91,6 +91,20 @@ ggplot(data = offClean, aes(value)) +
   facet_wrap(~ stat)
 ```
 
+<h1>Part 2 Question 3</h1>
+```{r}
+okoff <- offClean %>%
+  filter(Opponent_Opponent == 'Oklahoma') %>%
+  filter(stat == 'Receiving_YDS')
+okoff
+oroff <- offClean %>%
+  filter(Opponent_Opponent == "Oregon") %>%
+  filter(stat == 'Receiving_YDS')
+oroff %>%
+  full_join(okoff)
+ggplot(oroff, okoff, aes(oroff$value, okoff$value))
+```
+
 <h1>Part 2 Question 4</h1>
 ```{r}
 bioClean <- bioClean %>%
