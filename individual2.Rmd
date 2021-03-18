@@ -77,3 +77,14 @@ offClean <- offClean %>%
   pivot_longer(cols = Receiving_REC:Passing_INT, names_to = "stat")
 
 ```
+
+Part 2 Question 2
+```{R}
+
+ggplot(data = offClean, aes(value)) +
+  geom_histogram(color = "steelblue") + 
+  labs(title = "Distribution of Offensive Statistics",
+       y = "Number of Occurrences", x = "Value of Statistic") + 
+  facet_wrap(~ stat)
+
+```

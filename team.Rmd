@@ -14,10 +14,7 @@ bio <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Biography')
 ```
 
 
-### Part 1 Question 1
-
-## Part 1 : Question 1
-
+<h1>Part 1 Question 1</h1>
 ```{R}
 
 def$Name <- factor(def$Name)
@@ -29,10 +26,7 @@ off$Opponent_Opponent <- factor(off$Opponent_Opponent)
 ```
 
 
-### Part 1 Question 2
-
-## Part 1 : Question 2
-
+<h1>Part 1 Question 2</h1>
 ```{r}
 
 defClean <- def %>%
@@ -66,11 +60,7 @@ bioClean <- bio %>%
 #str(offClean)
 ```
 
-
-### Part 1 Question 3
-
-## Part 1 : Question 3
-
+<h1>Part 1 Question 3</h1>
 ```{r}
 bioClean <- bioClean %>%
   separate(Height, c('Height_feet', 'Height_inches')) %>%
@@ -80,26 +70,34 @@ bioClean <- bioClean %>%
   select(-Height_inches, -Height_feet)
 ```
 
-Part 2 Question 1
 ```{R}
-
-offClean <- offClean %>% 
-  pivot_longer(cols = Receiving_REC:Passing_INT, names_to = "stat")
-
-```
-
 str(defClean)
 str(offClean)
 str(bioClean)
 ```
 
-### Part 2 Question 4
+<h1>Part 2 Question 1</h1>
+```{R}
+offClean <- offClean %>% 
+  pivot_longer(cols = Receiving_REC:Passing_INT, names_to = "stat")
+```
+
+<h1>Part 2 Question 2</h1>
+```{R}
+ggplot(data = offClean, aes(value)) +
+  geom_histogram(color = "steelblue") + 
+  labs(title = "Distribution of Offensive Statistics",
+       y = "Number of Occurrences", x = "Value of Statistic") + 
+  facet_wrap(~ stat)
+```
+
+<h1>Part 2 Question 4</h1>
 ```{r}
 bioClean <- bioClean %>%
   separate(Hometown, c('Hometown_city', 'Hometown_state'), sep = ', ')
 ```
 
-### Part 2 Question 5
+<h1>Part 2 Question 5</h1>
 ```{r}
 bioClean %>%
   select(Hometown_state) %>%
@@ -107,12 +105,12 @@ bioClean %>%
   summarise(count = n())
 ```
 
-### Part 3 Question 1
+<h1>Part 3 Question 1</h1>
 ```{r}
 ggplot(bioClean, aes(Hometown_state)) + geom_bar()
 ```
 
-### Part 3 Question 2
+<h1>Part 3 Question 2</h1>
 Not surprisingly, the amount of touchdowns the team makes is dependent to the amount of touchdowns that the quarterback (Brock Purdy) makes.
 ```{r}
 purdy <- offClean %>%
@@ -142,7 +140,7 @@ team_summary <- team %>%
 head(team_summary)
 ```
 
-### Part 3 Question 3
+<h1>Part 3 Question 3</h1>
 JaQuan Bailey went from 10 total TD to 58. This is a large improvement from last year arguably making him the most improved player.
 ```{r}
 
