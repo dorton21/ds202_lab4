@@ -239,6 +239,35 @@ bio &lt;- read_excel(&#39;cyclonesFootball2020.xlsx&#39;, sheet = &#39;Biography
 ## 10 Bitter, Aid~ Wide Recei~ 182    Freshman    Tampa, Fla.   Steinbrenner     74
 ## # ... with 106 more rows</code></pre>
 </div>
+<div id="part-two" class="section level3">
+<h3>Part Two</h3>
+</div>
+<div id="question-4" class="section level3">
+<h3>Question 4</h3>
+<pre class="r"><code>d &lt;- bio %&gt;%
+  separate(Hometown, c(&#39;Hometown_city&#39;, &#39;Hometown_state&#39;), sep = &#39;, &#39;)</code></pre>
+</div>
+<div id="question-5" class="section level3">
+<h3>Question 5</h3>
+<pre class="r"><code>d %&gt;%
+  select(Hometown_state) %&gt;%
+  group_by(Hometown_state) %&gt;%
+  summarise(count = n())</code></pre>
+<pre><code>## # A tibble: 21 x 2
+##    Hometown_state count
+##  * &lt;chr&gt;          &lt;int&gt;
+##  1 Ariz.              4
+##  2 Ark.               1
+##  3 Australia          1
+##  4 Calif.             2
+##  5 Fla.              14
+##  6 Ga.                3
+##  7 Ill.               6
+##  8 Iowa              42
+##  9 Kan.               4
+## 10 Mich               1
+## # ... with 11 more rows</code></pre>
+</div>
 
 
 

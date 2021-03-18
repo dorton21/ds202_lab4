@@ -26,3 +26,21 @@ bio %>%
   mutate(Height = (Height_inches + (Height_feet * 12))) %>%
   select(-Height_inches, -Height_feet)
 ```
+
+### Part Two
+
+### Question 4
+```{r}
+d <- bio %>%
+  separate(Hometown, c('Hometown_city', 'Hometown_state'), sep = ', ')
+```
+
+### Question 5
+```{r}
+d %>%
+  select(Hometown_state) %>%
+  group_by(Hometown_state) %>%
+  summarise(count = n())
+```
+
+Nice Work -Desmond

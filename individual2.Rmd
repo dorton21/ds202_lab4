@@ -77,10 +77,3 @@ offClean <- offClean %>%
   pivot_longer(cols = Receiving_REC:Passing_INT, names_to = "stat")
 
 ```
-
-Part 2 Question 2
-```{R}
-
-
-
-```
