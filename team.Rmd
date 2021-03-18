@@ -49,7 +49,13 @@ defClean <- def %>%
 offClean <- off %>%
   mutate(Receiving_REC=as.numeric(Receiving_REC)) %>%
   mutate(Receiving_YDS=as.numeric(Receiving_YDS)) %>%
-  mutate(Receiving_TD=as.numeric(Receiving_TD))
+  mutate(Receiving_TD=as.numeric(Receiving_TD)) %>%
+  mutate(Rushing_ATT=as.numeric(Rushing_ATT)) %>%
+  mutate(Rushing_YDS=as.numeric(Rushing_YDS)) %>%
+  mutate(Rushing_TD=as.numeric(Rushing_TD)) %>%
+  mutate(Passing_YDS=as.numeric(Passing_YDS)) %>%
+  mutate(Passing_TD=as.numeric(Passing_TD)) %>%
+  mutate(Passing_INT=as.numeric(Passing_INT))
   
 bioClean <- bio %>%
   mutate(Weight=as.numeric(Weight))
@@ -90,3 +96,151 @@ bioClean %>%
   group_by(Hometown_state) %>%
   summarise(count = n())
 ```
+
+### Part 3 Question 1
+```{r}
+ggplot(bioClean, aes(Hometown_state)) + geom_bar()
+```
+
+### Part 3 Question 2
+Not surprisingly, the amount of touchdowns the team makes is dependent to the amount of touchdowns that the quarterback (Brock Purdy) makes.
+```{r}
+purdy <- offClean %>%
+  filter(Name=="Purdy, Brock")
+head(purdy)
+
+purdy_summary <- purdy %>% 
+  summarise(
+    Total_Pass_TD=sum(Passing_TD),
+    Total_Rush_TD=sum(Rushing_TD),
+    Mean_Pass_TD=mean(Passing_TD),
+    Mean_Rush_TD=mean(Rushing_TD),)
+head(purdy_summary)
+
+team <- offClean %>%
+  filter(Name!="Purdy, Brock")
+head(team)
+
+team_summary <- team %>%
+  group_by(Name) %>%
+  summarize(
+    Total_Receiving_TD=sum(Receiving_TD),
+    Total_Rushing_TD=sum(Rushing_TD),
+    Mean_Receiving_TD=mean(Receiving_TD),
+    Mean_Rushing_TD=mean(Rushing_TD)
+  )
+head(team_summary)
+```
+
+### Part 3 Question 3
+JaQuan Bailey went from 10 total TD to 58. This is a large improvement from last year arguably making him the most improved player.
+```{r}
+
+defense20 <- read_excel('cyclonesFootball2020.xlsx', sheet='Defensive')
+offense20 <- read_excel('cyclonesFootball2020.xlsx', sheet='Offensive')
+biography20 <- read_excel('cyclonesFootball2020.xlsx', sheet='Biography')
+
+defense19 <- read_excel('cyclonesFootball2019.xlsx', sheet='Defensive')
+offense19 <- read_excel('cyclonesFootball2019.xlsx', sheet='Offensive')
+biography19 <- read_excel('cyclonesFootball2019.xlsx', sheet='Biography')
+
+defClean19 <- defense19 %>%
+  mutate(Tackles_Solo=as.numeric(Tackles_Solo)) %>%
+  mutate(Tackles_ASST=as.numeric(Tackles_ASST)) %>%
+  mutate(Tackles_TFL=as.numeric(Tackles_TFL)) %>%
+  mutate(Tackles_Sack=as.numeric(Tackles_Sack)) %>%
+  mutate(Turnover_FF=as.numeric(Turnover_FF)) %>%
+  mutate(Turnover_FR=as.numeric(Turnover_FR)) %>%
+  mutate(Turnover_INT=as.numeric(Turnover_INT)) %>%
+  mutate(Pass_QBH=as.numeric(Pass_QBH)) %>%
+  mutate(Pass_PB=as.numeric(Pass_PB))
+  
+offClean19 <- offense19 %>%
+  mutate(Receiving_REC=as.numeric(Receiving_REC)) %>%
+  mutate(Receiving_YDS=as.numeric(Receiving_YDS)) %>%
+  mutate(Receiving_TD=as.numeric(Receiving_TD)) %>%
+  mutate(Rushing_ATT=as.numeric(Rushing_ATT)) %>%
+  mutate(Rushing_YDS=as.numeric(Rushing_YDS)) %>%
+  mutate(Rushing_TD=as.numeric(Rushing_TD)) %>%
+  mutate(Passing_YDS=as.numeric(Passing_YDS)) %>%
+  mutate(Passing_TD=as.numeric(Passing_TD)) %>%
+  mutate(Passing_INT=as.numeric(Passing_INT))
+
+defClean20 <- defense20 %>%
+  mutate(Tackles_Solo=as.numeric(Tackles_Solo)) %>%
+  mutate(Tackles_ASST=as.numeric(Tackles_ASST)) %>%
+  mutate(Tackles_TFL=as.numeric(Tackles_TFL)) %>%
+  mutate(Tackles_Sack=as.numeric(Tackles_Sack)) %>%
+  mutate(Turnover_FF=as.numeric(Turnover_FF)) %>%
+  mutate(Turnover_FR=as.numeric(Turnover_FR)) %>%
+  mutate(Turnover_INT=as.numeric(Turnover_INT)) %>%
+  mutate(Pass_QBH=as.numeric(Pass_QBH)) %>%
+  mutate(Pass_PB=as.numeric(Pass_PB))
+  
+offClean20 <- offense20 %>%
+  mutate(Receiving_REC=as.numeric(Receiving_REC)) %>%
+  mutate(Receiving_YDS=as.numeric(Receiving_YDS)) %>%
+  mutate(Receiving_TD=as.numeric(Receiving_TD)) %>%
+  mutate(Rushing_ATT=as.numeric(Rushing_ATT)) %>%
+  mutate(Rushing_YDS=as.numeric(Rushing_YDS)) %>%
+  mutate(Rushing_TD=as.numeric(Rushing_TD)) %>%
+  mutate(Passing_YDS=as.numeric(Passing_YDS)) %>%
+  mutate(Passing_TD=as.numeric(Passing_TD)) %>%
+  mutate(Passing_INT=as.numeric(Passing_INT))
+
+def_summary19 <- defClean19 %>%
+  group_by(Name) %>%
+  mutate(Tackles_Total=Tackles_Solo+Tackles_ASST+Tackles_TFL+Tackles_Sack) %>%
+  summarize(
+    Total_Tackles=sum(Tackles_Total),
+    Mean_Total_Tackles=mean(Tackles_Total),
+    Mean_Tackles_Solo=mean(Tackles_Solo),
+    Mean_Tackles_ASST=mean(Tackles_ASST),
+    Mean_Tackles_TFL=mean(Tackles_TFL),
+    Mean_Tackles_Sack=mean(Tackles_Sack),
+    Mean_Turnover_FF=mean(Turnover_FF),
+    Mean_Turnover_FR=mean(Turnover_FR),
+    Mean_Turnover_INT=mean(Turnover_INT),
+  )
+head(def_summary19)
+
+def_summary20 <- defClean20 %>%
+  group_by(Name) %>%
+  mutate(Tackles_Total=Tackles_Solo+Tackles_ASST+Tackles_TFL+Tackles_Sack) %>%
+  summarize(
+    Total_Tackles=sum(Tackles_Total),
+    Mean_Total_Tackles=mean(Tackles_Total),
+    Mean_Tackles_Solo=mean(Tackles_Solo),
+    Mean_Tackles_ASST=mean(Tackles_ASST),
+    Mean_Tackles_TFL=mean(Tackles_TFL),
+    Mean_Tackles_Sack=mean(Tackles_Sack),
+    Mean_Turnover_FF=mean(Turnover_FF),
+    Mean_Turnover_FR=mean(Turnover_FR),
+    Mean_Turnover_INT=mean(Turnover_INT),
+  )
+head(def_summary20)
+#Shows JaQuan Bailey went from 10 total TD to 58
+
+str(offClean20)
+
+off_summary19 <- offClean19 %>%
+  group_by(Name) %>%
+  summarize(
+    Total_Receiving_TD=sum(Receiving_TD),
+    Total_Rushing_TD=sum(Rushing_TD),
+    Mean_Receiving_TD=mean(Receiving_TD),
+    Mean_Rushing_TD=mean(Rushing_TD)
+  )
+head(off_summary19)
+
+off_summary20 <- offClean20 %>%
+  group_by(Name) %>%
+  summarize(
+    Total_Receiving_TD=sum(Receiving_TD),
+    Total_Rushing_TD=sum(Rushing_TD),
+    Mean_Receiving_TD=mean(Receiving_TD),
+    Mean_Rushing_TD=mean(Rushing_TD)
+  )
+head(off_summary20)
+```
+
