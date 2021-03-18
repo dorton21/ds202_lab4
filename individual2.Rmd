@@ -1,27 +1,84 @@
-```{R}
 
+### Setup
+```{r}
 library(dplyr)
+library(ggplot2)
 library(readxl)
-defense <- read_excel('C:/Users/justi/Desktop/DS202/ds202_lab4/cyclonesFootball2020.xlsx', sheet='Defensive')
-offense <- read_excel('C:/Users/justi/Desktop/DS202/ds202_lab4/cyclonesFootball2020.xlsx', sheet='Offensive')
-biography <- read_excel('C:/Users/justi/Desktop/DS202/ds202_lab4/cyclonesFootball2020.xlsx', sheet='Biography')
-str(defense)
-str(offense)
-str(biography)
+library(tidyverse)
 
+def <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Defensive')
+off <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Offensive')
+kikr <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Kick Returns')
+kik <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Kicking')
+bio <- read_excel('cyclonesFootball2020.xlsx', sheet = 'Biography')
 ```
 
-Question 1
+Part 1 Question 1
 ```{R}
 
-defense$Name <- factor(defense$Name)
-defense$Opponent_Opponent <- factor(defense$Opponent_Opponent)
-offense$Name <- factor(offense$Name)
-offense$Opponent_Opponent <- factor(offense$Opponent_Opponent)
+def$Name <- factor(def$Name)
+def$Opponent_Opponent <- factor(def$Opponent_Opponent)
+off$Name <- factor(off$Name)
+off$Opponent_Opponent <- factor(off$Opponent_Opponent)
 
 
 ```
 
+Part 1 Question 2
+```{r}
+library('tidyverse')
+library('dplyr')
+
+defClean <- def %>%
+  mutate(Tackles_Solo=as.numeric(Tackles_Solo)) %>%
+  mutate(Tackles_ASST=as.numeric(Tackles_ASST)) %>%
+  mutate(Tackles_TFL=as.numeric(Tackles_TFL)) %>%
+  mutate(Tackles_Sack=as.numeric(Tackles_Sack)) %>%
+  mutate(Turnover_FF=as.numeric(Turnover_FF)) %>%
+  mutate(Turnover_FR=as.numeric(Turnover_FR)) %>%
+  mutate(Turnover_INT=as.numeric(Turnover_INT)) %>%
+  mutate(Pass_QBH=as.numeric(Pass_QBH)) %>%
+  mutate(Pass_PB=as.numeric(Pass_PB))
+  
+offClean <- off %>%
+  mutate(Receiving_REC=as.numeric(Receiving_REC)) %>%
+  mutate(Receiving_YDS=as.numeric(Receiving_YDS)) %>%
+  mutate(Receiving_TD=as.numeric(Receiving_TD)) %>%
+  mutate(Rushing_ATT=as.numeric(Rushing_ATT)) %>%
+  mutate(Rushing_YDS=as.numeric(Rushing_YDS)) %>%
+  mutate(Rushing_TD=as.numeric(Rushing_TD)) %>%
+  mutate(`Passing_CMP-ATT`=as.numeric(`Passing_CMP-ATT`)) %>%
+  mutate(Passing_YDS=as.numeric(Passing_YDS)) %>%
+  mutate(Passing_TD=as.numeric(Passing_TD)) %>%
+  mutate(Passing_INT=as.numeric(Passing_INT))
+  
+bioClean <- bio %>%
+  mutate(Weight=as.numeric(Weight))
+
+str(defClean)
+str(bioClean)
+str(offClean)
+```
+
+Part 1 Question 3
+```{r}
+bio %>%
+  separate(Height, c('Height_feet', 'Height_inches')) %>%
+  mutate(Height_feet = as.integer(Height_feet), 
+         Height_inches = as.integer(Height_inches)) %>%
+  mutate(Height = (Height_inches + (Height_feet * 12))) %>%
+  select(-Height_inches, -Height_feet)
+```
+
+Part 2 Question 1
+```{R}
+
+offClean <- offClean %>% 
+  pivot_longer(cols = Receiving_REC:Passing_INT, names_to = "stat")
+
+```
+
+Part 2 Question 2
 ```{R}
 
 

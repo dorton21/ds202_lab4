@@ -43,7 +43,14 @@ defClean <- def %>%
 offClean <- off %>%
   mutate(Receiving_REC=as.numeric(Receiving_REC)) %>%
   mutate(Receiving_YDS=as.numeric(Receiving_YDS)) %>%
-  mutate(Receiving_TD=as.numeric(Receiving_TD))
+  mutate(Receiving_TD=as.numeric(Receiving_TD)) %>%
+  mutate(Rushing_ATT=as.numeric(Rushing_ATT)) %>%
+  mutate(Rushing_YDS=as.numeric(Rushing_YDS)) %>%
+  mutate(Rushing_TD=as.numeric(Rushing_TD)) %>%
+  mutate(`Passing_CMP-ATT`=as.numeric(`Passing_CMP-ATT`)) %>%
+  mutate(Passing_YDS=as.numeric(Passing_YDS)) %>%
+  mutate(Passing_TD=as.numeric(Passing_TD)) %>%
+  mutate(Passing_INT=as.numeric(Passing_INT))
   
 bioClean <- bio %>%
   mutate(Weight=as.numeric(Weight))
@@ -61,4 +68,12 @@ bio %>%
          Height_inches = as.integer(Height_inches)) %>%
   mutate(Height = (Height_inches + (Height_feet * 12))) %>%
   select(-Height_inches, -Height_feet)
+```
+
+Part 2 Question 1
+```{R}
+
+offClean <- offClean %>% 
+  pivot_longer(cols = Receiving_REC:Passing_INT, names_to = "stat")
+
 ```
