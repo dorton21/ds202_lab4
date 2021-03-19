@@ -102,7 +102,7 @@ oroff <- offClean %>%
   filter(stat == 'Receiving_YDS')
 oroff %>%
   full_join(okoff)
-ggplot(oroff, okoff, aes(oroff$value, okoff$value))
+ggplot(oroff, aes(value, weight = Name)) + geom_bar()
 ```
 
 <h1>Part 2 Question 4</h1>
