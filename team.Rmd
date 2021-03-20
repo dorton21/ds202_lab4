@@ -128,37 +128,6 @@ ggplot(bioClean, aes(Hometown_state)) + geom_bar()
 <h1>Part 3 Question 2</h1>
 Not surprisingly, the amount of touchdowns the team makes is dependent to the amount of touchdowns that the quarterback (Brock Purdy) makes.
 ```{r}
-purdy <- offClean %>%
-  filter(Name=="Purdy, Brock")
-head(purdy)
-
-purdy_summary <- purdy %>% 
-  summarise(
-    Total_Pass_TD=sum(Passing_TD),
-    Total_Rush_TD=sum(Rushing_TD),
-    Mean_Pass_TD=mean(Passing_TD),
-    Mean_Rush_TD=mean(Rushing_TD))
-head(purdy_summary)
-
-team <- offClean %>%
-  filter(Name!="Purdy, Brock")
-head(team)
-
-team_summary <- team %>%
-  group_by(Name) %>%
-  summarize(
-    Total_Receiving_TD=sum(Receiving_TD),
-    Total_Rushing_TD=sum(Rushing_TD),
-    Mean_Receiving_TD=mean(Receiving_TD),
-    Mean_Rushing_TD=mean(Rushing_TD)
-  )
-head(team_summary)
-```
-
-<h1>Part 3 Question 3</h1>
-JaQuan Bailey went from 10 total TD to 58. This is a large improvement from last year arguably making him the most improved player.
-```{r}
-
 defense20 <- read_excel('cyclonesFootball2020.xlsx', sheet='Defensive')
 offense20 <- read_excel('cyclonesFootball2020.xlsx', sheet='Offensive')
 biography20 <- read_excel('cyclonesFootball2020.xlsx', sheet='Biography')
@@ -166,6 +135,18 @@ biography20 <- read_excel('cyclonesFootball2020.xlsx', sheet='Biography')
 defense19 <- read_excel('cyclonesFootball2019.xlsx', sheet='Defensive')
 offense19 <- read_excel('cyclonesFootball2019.xlsx', sheet='Offensive')
 biography19 <- read_excel('cyclonesFootball2019.xlsx', sheet='Biography')
+
+
+offClean20 <- offense20 %>%
+  mutate(Receiving_REC=as.numeric(Receiving_REC)) %>%
+  mutate(Receiving_YDS=as.numeric(Receiving_YDS)) %>%
+  mutate(Receiving_TD=as.numeric(Receiving_TD)) %>%
+  mutate(Rushing_ATT=as.numeric(Rushing_ATT)) %>%
+  mutate(Rushing_YDS=as.numeric(Rushing_YDS)) %>%
+  mutate(Rushing_TD=as.numeric(Rushing_TD)) %>%
+  mutate(Passing_YDS=as.numeric(Passing_YDS)) %>%
+  mutate(Passing_TD=as.numeric(Passing_TD)) %>%
+  mutate(Passing_INT=as.numeric(Passing_INT))
 
 defClean19 <- defense19 %>%
   mutate(Tackles_Solo=as.numeric(Tackles_Solo)) %>%
@@ -210,6 +191,38 @@ offClean20 <- offense20 %>%
   mutate(Passing_YDS=as.numeric(Passing_YDS)) %>%
   mutate(Passing_TD=as.numeric(Passing_TD)) %>%
   mutate(Passing_INT=as.numeric(Passing_INT))
+
+
+purdy <- offClean20 %>%
+  filter(Name=="Purdy, Brock")
+head(purdy)
+
+purdy_summary <- purdy %>% 
+  summarise(
+    Total_Pass_TD=sum(Passing_TD),
+    Total_Rush_TD=sum(Rushing_TD),
+    Mean_Pass_TD=mean(Passing_TD),
+    Mean_Rush_TD=mean(Rushing_TD))
+head(purdy_summary)
+
+team <- offClean20 %>%
+  filter(Name!="Purdy, Brock")
+head(team)
+
+team_summary <- team %>%
+  group_by(Name) %>%
+  summarize(
+    Total_Receiving_TD=sum(Receiving_TD),
+    Total_Rushing_TD=sum(Rushing_TD),
+    Mean_Receiving_TD=mean(Receiving_TD),
+    Mean_Rushing_TD=mean(Rushing_TD)
+  )
+head(team_summary)
+```
+
+<h1>Part 3 Question 3</h1>
+JaQuan Bailey went from 10 total TD to 58. This is a large improvement from last year arguably making him the most improved player.
+```{r}
 
 def_summary19 <- defClean19 %>%
   group_by(Name) %>%
