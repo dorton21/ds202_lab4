@@ -110,6 +110,9 @@ ggplot(okoff, aes(value)) + geom_dotplot() + xlab('Number of Receiving Yards Aga
 ```{r}
 bioClean <- bioClean %>%
   separate(Hometown, c('Hometown_city', 'Hometown_state'), sep = ', ')
+bioClean %>%
+  select(Hometown_city, Hometown_state) %>%
+  head()
 ```
 
 <h1>Part 2 Question 5</h1>
