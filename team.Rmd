@@ -100,9 +100,10 @@ okoff
 oroff <- offClean %>%
   filter(Opponent_Opponent == "Oregon") %>%
   filter(stat == 'Receiving_YDS')
-oroff %>%
+okoroff <- oroff %>%
   full_join(okoff)
-ggplot(oroff, aes(value, weight = Name)) + geom_bar()
+ggplot(oroff, aes(value)) + geom_dotplot() + xlab('Number of Receiving Yards Against Oregon') + ylab('Proportion of Players') + ggtitle('Receiving Yards Against Oregon Where Each Dot Represents a Player')
+ggplot(okoff, aes(value)) + geom_dotplot() + xlab('Number of Receiving Yards Against Oklahoma') + ylab('Proportion of Players') + ggtitle('Receiving Yards Against Oklahoma Where Each Dot Represents a Player')
 ```
 
 <h1>Part 2 Question 4</h1>
@@ -136,7 +137,7 @@ purdy_summary <- purdy %>%
     Total_Pass_TD=sum(Passing_TD),
     Total_Rush_TD=sum(Rushing_TD),
     Mean_Pass_TD=mean(Passing_TD),
-    Mean_Rush_TD=mean(Rushing_TD),)
+    Mean_Rush_TD=mean(Rushing_TD))
 head(purdy_summary)
 
 team <- offClean %>%
